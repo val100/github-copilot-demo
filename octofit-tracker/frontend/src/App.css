@@ -1,38 +1,179 @@
+/* ===== OctoFit Tracker theme ===== */
+
+:root {
+  --octofit-primary: #4682b4;      /* Steel blue */
+  --octofit-primary-dark: #2f5f8f;
+  --octofit-accent: #e0ffff;       /* Light cyan */
+  --octofit-ink: #00008b;          /* Dark blue headings */
+  --octofit-surface: #f0f8ff;      /* Light blue background */
+}
+
+/* General styles */
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(180deg, var(--octofit-surface) 0%, #e6f2ff 100%);
+  color: #1f3a5f; /* Default text color */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Links */
+a {
+  color: var(--octofit-primary);
+}
+
+a:hover {
+  color: var(--octofit-primary-dark);
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Navigation styles */
+.navbar.octofit-navbar {
+  background: linear-gradient(90deg, var(--octofit-primary-dark), var(--octofit-primary));
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.octofit-navbar .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Logo */
+.octofit-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: #fff;
+  padding: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.octofit-navbar .nav-link {
+  font-weight: 600;
+  transition: color 0.3s, transform 0.2s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .octofit-navbar .nav-link:hover {
+    color: var(--octofit-accent);
+    transform: translateY(-1px);
+  }
+}
+
+/* Headings */
+h1, .octofit-page-title {
+  color: var(--octofit-ink);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+/* Cards */
+.octofit-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.octofit-card .card-header {
+  background-color: var(--octofit-primary);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Table styles */
+.octofit-card table {
+  margin-bottom: 0;
+  background-color: #ffffff;
+}
+
+.octofit-card table th {
+  background-color: var(--octofit-primary);
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.octofit-card table td {
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+}
+
+.octofit-card table tr:nth-child(even) {
+  background-color: var(--octofit-surface);
+}
+
+.octofit-card table tbody tr {
+  transition: background-color 0.2s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .octofit-card table tbody tr:hover {
+    background-color: var(--octofit-accent);
+  }
+}
+
+/* Buttons */
+.btn-octofit {
+  background-color: var(--octofit-primary);
+  border-color: var(--octofit-primary);
+  color: #fff;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-octofit:hover,
+.btn-octofit:focus {
+  background-color: #5a9bd4;
+  border-color: #5a9bd4;
+  color: #fff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-octofit:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Hero (Home) */
+.octofit-hero {
+  padding: 4rem 1rem;
+}
+
+.octofit-hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+.octofit-hero .lead {
+  color: #335;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+/* Staggered entrance animation (transform/opacity only) */
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .octofit-fade-up {
+    animation: octofit-fade-up 0.5s ease-out both;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  .octofit-fade-up:nth-child(2) { animation-delay: 0.08s; }
+  .octofit-fade-up:nth-child(3) { animation-delay: 0.16s; }
+  .octofit-fade-up:nth-child(4) { animation-delay: 0.24s; }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  @keyframes octofit-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

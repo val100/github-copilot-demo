@@ -25,7 +25,16 @@ SECRET_KEY = 'django-insecure-a(4t=*55x7se=q+wjp9rxe+3*ve7)w#u2(6i*$4h7d^1g9jx-r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'copilot-devo-spork-g6pj46rr9hpp6x-8000.app.github.dev']
+
+# Trust the Codespaces HTTPS proxy and avoid certificate/HTTPS redirect issues
+CSRF_TRUSTED_ORIGINS = [
+    'https://copilot-devo-spork-g6pj46rr9hpp6x-8000.app.github.dev',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False
 
 
 # Application definition
@@ -37,9 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'octofit_tracker',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,10 +88,14 @@ WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'octofit_db',
+        'HOST': 'localhost',
+        'PORT': 27017,
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Password validation
